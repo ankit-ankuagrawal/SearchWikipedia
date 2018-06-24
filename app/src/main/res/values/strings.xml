@@ -3,6 +3,6 @@
     <string name="instruction">Press the search icon to find Article\'s on Wikipedia</string>
     <string name="search_result">Articles on</string>
     <string name="progress_dialog">Searching...</string>
-    <string name="search_view">Search Wikipedia...</string>
+    <string name="search_view">Search Article...</string>
     <string name="search_empty">Search can\'t be empty</string>
 </resources>
