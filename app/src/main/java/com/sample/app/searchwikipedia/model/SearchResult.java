@@ -2,12 +2,7 @@ package com.sample.app.searchwikipedia.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.HashMap;
 import java.util.Map;
-
-/**
- * Created by rakagarw on 22/06/2018.
- */
 
 public class SearchResult {
 

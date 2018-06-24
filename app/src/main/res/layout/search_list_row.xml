@@ -24,11 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:text="title"
             android:textSize="16sp"
             android:textStyle="bold" />
-        <!--android:typeface="@font/roboto_bold"--> />
-
 
         <TextView
             android:id="@+id/tvDescription"
@@ -36,7 +33,6 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="description"
             android:textSize="14sp" />
     </LinearLayout>
 

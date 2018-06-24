@@ -15,6 +15,8 @@ public class PageItem {
     private int ns;
     private String title;
     private int index;
+    @SerializedName("fullurl")
+    private String fullUrl;
     private ThumbnailItem thumbnail;
     private TermsItem terms;
 
@@ -34,6 +36,10 @@ public class PageItem {
         return index;
     }
 
+    public String getFullUrl() {
+        return fullUrl;
+    }
+
     public ThumbnailItem getThumbnail() {
         return thumbnail;
     }
@@ -46,7 +52,8 @@ public class PageItem {
         StringBuffer sb = new StringBuffer("pageId: " + pageId);
         sb.append("\nns: " + ns).
                 append("\ntitle: " + title).
-                append("\nindex: " + index);
+                append("\nindex: " + index).
+                append("\nfullUrl: " + fullUrl);
         if (thumbnail != null) {
             sb.append(thumbnail.toString());
         }

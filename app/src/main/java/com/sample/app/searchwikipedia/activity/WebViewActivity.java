@@ -7,6 +7,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.sample.app.searchwikipedia.R;
+import com.sample.app.searchwikipedia.util.SearchUtility;
 
 public class WebViewActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
 
-        int pageId = getIntent().getIntExtra("pageid", -1);
+        String fullUrl = getIntent().getStringExtra(SearchUtility.FULL_URL_EXTRA);
         webview = (WebView) findViewById(R.id.webview);
         webview.setWebViewClient(new WebViewClient() {
             @Override
@@ -26,6 +27,6 @@ public class WebViewActivity extends AppCompatActivity {
             }
         });
 
-        webview.loadUrl("http://en.wikipedia.org/?curid=" + pageId);
+        webview.loadUrl(fullUrl);
     }
 }

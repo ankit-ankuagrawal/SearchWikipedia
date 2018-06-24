@@ -39,7 +39,7 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, Void> {
 
             do {
                 morePageAvailable = false;
-                url = new URL(SearchUtility.getQueryUri(data[0], result.getContinue()));
+                url = new URL(SearchUtility.getQueryStringUri(data[0], result.getContinue()));
                 urlConnection = (HttpsURLConnection) url.openConnection();
                 urlConnection.connect();
 

@@ -1,15 +1,12 @@
 package com.sample.app.searchwikipedia.activity;
 
 import android.app.ProgressDialog;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 
@@ -17,17 +14,9 @@ import com.sample.app.searchwikipedia.R;
 import com.sample.app.searchwikipedia.adapter.SearchAdapter;
 import com.sample.app.searchwikipedia.asynctask.HttpGetAsyncTask;
 import com.sample.app.searchwikipedia.model.PageItem;
-import com.sample.app.searchwikipedia.model.SearchResult;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public class SearchActivity extends AppCompatActivity {
 
@@ -112,5 +101,4 @@ public class SearchActivity extends AppCompatActivity {
     public void updateRecyclerView(int positionStart, int itemCount) {
         searchAdapter.notifyItemRangeInserted(positionStart, itemCount);
     }
-
 }

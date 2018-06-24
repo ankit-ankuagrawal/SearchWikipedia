@@ -3,7 +3,6 @@ package com.sample.app.searchwikipedia.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,13 +13,10 @@ import android.widget.TextView;
 import com.sample.app.searchwikipedia.R;
 import com.sample.app.searchwikipedia.activity.WebViewActivity;
 import com.sample.app.searchwikipedia.model.PageItem;
+import com.sample.app.searchwikipedia.util.SearchUtility;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-/**
- * Created by rakagarw on 23/06/2018.
- */
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
 
@@ -63,7 +59,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, WebViewActivity.class);
-                intent.putExtra("pageid", pageItem.getPageId());
+                intent.putExtra(SearchUtility.FULL_URL_EXTRA, pageItem.getFullUrl());
                 context.startActivity(intent);
             }
         });
