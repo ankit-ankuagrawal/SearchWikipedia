@@ -1,0 +1,59 @@
+package com.sample.app.searchwikipedia.model;
+
+import com.google.gson.annotations.SerializedName;
+
+/**
+ * Created by ankit on 22/06/2018.
+ */
+
+public class PageItem {
+
+    private static final String LOG_TAG = PageItem.class.getSimpleName();
+
+    @SerializedName("pageid")
+    private int pageId;
+    private int ns;
+    private String title;
+    private int index;
+    private ThumbnailItem thumbnail;
+    private TermsItem terms;
+
+    public int getPageId() {
+        return pageId;
+    }
+
+    public int getNs() {
+        return ns;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public ThumbnailItem getThumbnail() {
+        return thumbnail;
+    }
+
+    public TermsItem getTerms() {
+        return terms;
+    }
+
+    public String toString() {
+        StringBuffer sb = new StringBuffer("pageId: " + pageId);
+        sb.append("\nns: " + ns).
+                append("\ntitle: " + title).
+                append("\nindex: " + index);
+        if (thumbnail != null) {
+            sb.append(thumbnail.toString());
+        }
+        if (terms != null) {
+            sb.append(terms.toString());
+        }
+        sb.append("\n");
+        return sb.toString();
+    }
+}
