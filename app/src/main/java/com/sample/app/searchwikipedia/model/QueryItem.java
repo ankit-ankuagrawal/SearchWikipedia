@@ -1,7 +1,10 @@
 package com.sample.app.searchwikipedia.model;
 
-import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Model class representing Queries object from the json response
+ */
 
 public class QueryItem {
     private static final String LOG_TAG = QueryItem.class.getSimpleName();

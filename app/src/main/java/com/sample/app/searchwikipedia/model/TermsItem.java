@@ -3,6 +3,10 @@ package com.sample.app.searchwikipedia.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Model class representing Terms object from the json response
+ */
+
 public class TermsItem {
 
     private static final String LOG_TAG = TermsItem.class.getSimpleName();

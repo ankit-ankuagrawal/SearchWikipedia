@@ -3,7 +3,7 @@ package com.sample.app.searchwikipedia.model;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by ankit on 22/06/2018.
+ * Model class representing Pages object from the json response
  */
 
 public class PageItem {

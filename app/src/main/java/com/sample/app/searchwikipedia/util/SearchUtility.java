@@ -4,6 +4,10 @@ import android.net.Uri;
 
 import java.util.Map;
 
+/**
+ * Utility class to perform some basic operations
+ */
+
 public class SearchUtility {
 
     public static final String HTTPS_SCHEME = "https";
@@ -53,6 +57,7 @@ public class SearchUtility {
     public static final String GPSSEARCH_STRING = "gpssearch";
 
     public static final String FULL_URL_EXTRA = "FULL_URL";
+    public static final String PAGE_TITLE_EXTRA = "PAGE_TITLE";
 
     public static String getQueryStringUri(String query, Map<String, String> queryParameterMap) {
         Uri.Builder uriBuilder = new Uri.Builder();

@@ -1,6 +1,11 @@
 package com.sample.app.searchwikipedia.model;
 
+/**
+ * Model class representing Thumbnail object from the json response
+ */
+
 public class ThumbnailItem {
+
     private static final String LOG_TAG = ThumbnailItem.class.getSimpleName();
 
     private String source;

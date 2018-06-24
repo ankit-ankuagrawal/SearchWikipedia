@@ -4,6 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Map;
 
+/**
+ * Model class representing whole search object returned from the json response
+ */
+
 public class SearchResult {
 
     private static final String LOG_TAG = SearchResult.class.getSimpleName();

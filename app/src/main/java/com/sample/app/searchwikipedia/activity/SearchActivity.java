@@ -11,6 +11,9 @@ import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.sample.app.searchwikipedia.R;
 import com.sample.app.searchwikipedia.adapter.SearchAdapter;
@@ -22,7 +25,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity {
+/**
+ * Activity responsible to display all available search result in recycler view
+ */
+
+public class SearchActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private static final String LOG_TAG = SearchActivity.class.getSimpleName();
 
@@ -33,12 +40,16 @@ public class SearchActivity extends AppCompatActivity {
     private List<PageItem> pageItemList = new ArrayList<>();
 
     private ProgressDialog progressDialog;
+    private TextView tvInstruction;
+
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        tvInstruction = (TextView) findViewById(R.id.tvInstruction);
         rvSearch = (RecyclerView) findViewById(R.id.rvSearch);
         layoutManager = new LinearLayoutManager(this);
         rvSearch.addItemDecoration(new DividerItemDecoration(this,
@@ -62,31 +73,25 @@ public class SearchActivity extends AppCompatActivity {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu, menu);
 
-        final SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setQueryHint(getString(R.string.search_view));
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        MenuItem searchMenuItem = (MenuItem) menu.findItem(R.id.searchMenu);
+        searchMenuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
-            public boolean onQueryTextSubmit(String searchWord) {
-                if (searchWord.isEmpty()) {
-                    return false;
-                }
-
-                searchView.clearFocus();
-                pageItemList.clear();
-
-                ((SearchAdapter) searchAdapter).setSearchWord(searchWord);
-                searchAdapter.notifyDataSetChanged();
-                showProgressDialog();
-
-                makeNetworkCall(searchWord);
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                tvInstruction.setVisibility(View.GONE);
+                refreshRecyclerView("");
                 return true;
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                return false;
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                tvInstruction.setVisibility(View.VISIBLE);
+                return true;
             }
         });
+        searchView = (SearchView) searchMenuItem.getActionView();
+        searchView.setQueryHint(getString(R.string.search_view));
+        searchView.setOnQueryTextListener(this);
+
         return true;
     }
 
@@ -106,7 +111,9 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void cancelProgressDialog() {
-        progressDialog.cancel();
+        if (progressDialog != null) {
+            progressDialog.cancel();
+        }
     }
 
     public List<PageItem> getPageItemList() {
@@ -126,5 +133,25 @@ public class SearchActivity extends AppCompatActivity {
         if (cache != null) {
             cache.flush();
         }
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        searchView.clearFocus();
+        refreshRecyclerView(query);
+        makeNetworkCall(query);
+        showProgressDialog();
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+    private void refreshRecyclerView(String query) {
+        pageItemList.clear();
+        ((SearchAdapter) searchAdapter).setSearchWord(query);
+        searchAdapter.notifyDataSetChanged();
     }
 }

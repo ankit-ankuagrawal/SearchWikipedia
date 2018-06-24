@@ -18,6 +18,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+/**
+ * Adapter class for article search results
+ */
+
 public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final String LOG_TAG = SearchAdapter.class.getSimpleName();
@@ -88,6 +92,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 public void onClick(View v) {
                     Intent intent = new Intent(context, WebViewActivity.class);
                     intent.putExtra(SearchUtility.FULL_URL_EXTRA, pageItem.getFullUrl());
+                    intent.putExtra(SearchUtility.PAGE_TITLE_EXTRA, pageItem.getTitle());
                     context.startActivity(intent);
                 }
             });

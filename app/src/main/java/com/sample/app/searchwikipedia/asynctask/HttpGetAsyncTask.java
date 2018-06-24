@@ -13,6 +13,10 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
+/**
+ * Async task responsible to make network call to get search result from wikipedia server and update the ui
+ */
+
 public class HttpGetAsyncTask extends AsyncTask<String, Integer, Void> {
 
     private static final String LOG_TAG = HttpGetAsyncTask.class.getSimpleName();
@@ -70,7 +74,7 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, Void> {
             while (morePageAvailable);
 
         } catch (Exception e) {
-            Log.e(LOG_TAG, "Exception while making a network request", e);
+            Log.e(LOG_TAG, "Exception while making a network request" + e);
             publishProgress(0, 0);
         }
         return null;
