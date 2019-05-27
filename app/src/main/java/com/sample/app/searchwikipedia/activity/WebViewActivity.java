@@ -1,13 +1,19 @@
+
 package com.sample.app.searchwikipedia.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sample.app.searchwikipedia.R;
 import com.sample.app.searchwikipedia.util.SearchUtility;
 
@@ -15,19 +21,26 @@ import com.sample.app.searchwikipedia.util.SearchUtility;
  * Activity responsible to show wikipedia click article in webview
  */
 
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private ProgressBar progressBarCyclic;
     private WebView webview;
+    private BottomNavigationView bottomNavigationView;
+
+    private String pageTitle;
+    private String fullUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webview);
 
-        String fullUrl = getIntent().getStringExtra(SearchUtility.FULL_URL_EXTRA);
-        String pageTitle = getIntent().getStringExtra(SearchUtility.PAGE_TITLE_EXTRA);
+        fullUrl = getIntent().getStringExtra(SearchUtility.FULL_URL_EXTRA);
+        pageTitle = getIntent().getStringExtra(SearchUtility.PAGE_TITLE_EXTRA);
         setTitle(pageTitle);
+
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
 
         progressBarCyclic = (ProgressBar) findViewById(R.id.progressBarCyclic);
         webview = (WebView) findViewById(R.id.webview);
@@ -47,5 +60,32 @@ public class WebViewActivity extends AppCompatActivity {
         });
 
         webview.loadUrl(fullUrl);
+    }
+
+    public void onClick(View v) {
+        finishActivityWithResult(SearchUtility.ACTIVITY_CLOSED);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.newSearch:
+                finishActivityWithResult(SearchUtility.SEARCH_NEW_ARTICLE);
+                break;
+            case R.id.share:
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.article) + pageTitle + "\n" + fullUrl);
+                startActivity(Intent.createChooser(intent, getResources().getText(R.string.share_article)));
+                break;
+        }
+        return false;
+    }
+
+    private void finishActivityWithResult(int successCode) {
+        Intent intent = new Intent();
+        setResult(successCode, intent);
+        finish();
     }
 }
