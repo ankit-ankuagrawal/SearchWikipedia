@@ -11,5 +11,6 @@
     <string name="share">Share</string>
     <string name="share_article">Share Article Via</string>
     <string name="article">Article: </string>
+    <string name="back">Back</string>
 
 </resources>

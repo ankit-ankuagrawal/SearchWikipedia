@@ -62,13 +62,12 @@ public class WebViewActivity extends AppCompatActivity implements BottomNavigati
         webview.loadUrl(fullUrl);
     }
 
-    public void onClick(View v) {
-        finishActivityWithResult(SearchUtility.ACTIVITY_CLOSED);
-    }
-
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.back:
+                finishActivityWithResult(SearchUtility.ACTIVITY_CLOSED);
+                break;
             case R.id.newSearch:
                 finishActivityWithResult(SearchUtility.SEARCH_NEW_ARTICLE);
                 break;

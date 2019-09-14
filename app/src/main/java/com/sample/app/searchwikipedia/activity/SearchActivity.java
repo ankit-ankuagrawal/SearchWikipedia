@@ -49,6 +49,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
 
     private HttpGetAsyncTask asyncTask;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,8 +97,6 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         searchView = (SearchView) searchMenuItem.getActionView();
         searchView.setQueryHint(getString(R.string.search_view));
         searchView.setOnQueryTextListener(this);
-
-        searchMenuItem.expandActionView();
 
         return true;
     }
