@@ -24,7 +24,7 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, Void> {
     private SearchActivity searchActivity;
 
     public HttpGetAsyncTask(SearchActivity searchActivity) {
-        this.searchActivity = searchActivity;
+        setSearchActivity(searchActivity);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, Void> {
                     result = gson.fromJson(new InputStreamReader(urlConnection.getInputStream()), SearchResult.class);
 
                     int requestItemCount = 0;
-                    if (result.getQuery() != null) {
+                    if (result.getQuery() != null && searchActivity != null) {
                         requestItemCount = result.getQuery().getPages().size();
                         searchActivity.getPageItemList().addAll(result.getQuery().getPages());
                         totalPageItemCount += requestItemCount;
@@ -82,7 +82,13 @@ public class HttpGetAsyncTask extends AsyncTask<String, Integer, Void> {
 
     @Override
     protected void onProgressUpdate(Integer... data) {
-        searchActivity.cancelProgressDialog();
-        searchActivity.updateRecyclerView(data[0], data[1]);
+        if (searchActivity != null) {
+            searchActivity.cancelProgressDialog();
+            searchActivity.updateRecyclerView(data[0], data[1]);
+        }
+    }
+
+    public void setSearchActivity(SearchActivity searchActivity) {
+        this.searchActivity = searchActivity;
     }
 }

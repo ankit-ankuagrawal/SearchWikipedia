@@ -1,13 +1,9 @@
 package com.sample.app.searchwikipedia.activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.http.HttpResponseCache;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,10 +11,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.sample.app.searchwikipedia.R;
 import com.sample.app.searchwikipedia.adapter.SearchAdapter;
 import com.sample.app.searchwikipedia.asynctask.HttpGetAsyncTask;
 import com.sample.app.searchwikipedia.model.PageItem;
+import com.sample.app.searchwikipedia.util.SearchUtility;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +46,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     private TextView tvInstruction;
 
     private SearchView searchView;
+
+    private HttpGetAsyncTask asyncTask;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +79,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.search_menu, menu);
 
-        MenuItem searchMenuItem = (MenuItem) menu.findItem(R.id.searchMenu);
+        final MenuItem searchMenuItem = (MenuItem) menu.findItem(R.id.searchMenu);
         searchMenuItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
@@ -96,7 +102,7 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     }
 
     private void makeNetworkCall(String query) {
-        HttpGetAsyncTask asyncTask = new HttpGetAsyncTask(this);
+        asyncTask = new HttpGetAsyncTask(this);
         asyncTask.execute(query);
     }
 
@@ -129,6 +135,9 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
     @Override
     protected void onStop() {
         super.onStop();
+        if (asyncTask != null) {
+            asyncTask.setSearchActivity(null);
+        }
         HttpResponseCache cache = HttpResponseCache.getInstalled();
         if (cache != null) {
             cache.flush();
@@ -153,5 +162,29 @@ public class SearchActivity extends AppCompatActivity implements SearchView.OnQu
         pageItemList.clear();
         ((SearchAdapter) searchAdapter).setSearchWord(query);
         searchAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (asyncTask != null) {
+            asyncTask.setSearchActivity(this);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.i(LOG_TAG, "result code: " + resultCode);
+        switch (resultCode) {
+            case SearchUtility.ACTIVITY_CLOSED:
+                break;
+            case SearchUtility.SEARCH_NEW_ARTICLE:
+                searchView.setQuery("", false);
+                refreshRecyclerView("");
+                searchView.requestFocusFromTouch();
+                break;
+            default:
+        }
     }
 }

@@ -86,4 +86,7 @@ public class SearchUtility {
 
         return uriBuilder.build().toString();
     }
+
+    public static final int ACTIVITY_CLOSED = 100;
+    public static final int SEARCH_NEW_ARTICLE = 101;
 }
