@@ -13,4 +13,33 @@
     <string name="article">Article: </string>
     <string name="back">Back</string>
 
+    <!-- strings added in 4.0 -->
+    <string name="exit_app">Exit App</string>
+    <string name="rate_app">Rate App</string>
+    <string name="share_app">Share App</string>
+
+    <string name="install_the_app">Install the %s App\n %s</string>
+
+    <!--strings added in 5.0-->
+    <string name="search_result_empty">No related article\'s found on Wikipedia</string>
+    <!--Navigation drawer-->
+    <string name="dev_about_app_developer">Apps Nesst (App Developer)</string>
+    <string name="dev_apps_neest_home_for_software_development">Apps Nesst : Home for Software Development</string>
+    <string name="dev_about_apps_nesst_detail">Born in 2019, Apps Nesst is a forward-looking company focussed on transforming complex processes into simple mobile app based solutions.\n\n
+We are a team of like-minded people, engaged in software development, specialized in Android App Development.\n\n
+        We are more into customization of softwares required in industries such as Steel, Education, Health Care Sector and Employee Service App.\n\n</string>
+    <string name="dev_about_apps_nesst">About Apps Nesst</string>
+    <string name="dev_other_apps_from_developer">Other Apps from Developer</string>
+    <string name="dev_contact_developer">Contact Developer</string>
+    <string name="dev_install_the_app">Install the %s App\n %s</string>
+    <string name="dev_app_share">Share App</string>
+    <string name="dev_app_exit">Exit App</string>
+    <string name="dev_app_rate">Rate App</string>
+    <string name="dev_contact_details">Contact Details</string>
+    <string name="dev_contact_apps_nesst">Apps Nesst : Home for Software Development\n\n
+    Contact No.: +91-850399076\n
+    Email-Id   : appsnesst@gmail.com</string>
+    <string name="contact_no">+91-8503990796</string>
+    <string name="email_id">appsnesst@gmail.com</string>
+
 </resources>

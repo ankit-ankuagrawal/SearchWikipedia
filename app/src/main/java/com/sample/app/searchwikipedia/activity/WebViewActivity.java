@@ -13,6 +13,11 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.sample.app.searchwikipedia.R;
 import com.sample.app.searchwikipedia.util.SearchUtility;
@@ -25,6 +30,7 @@ public class WebViewActivity extends AppCompatActivity implements BottomNavigati
 
     private ProgressBar progressBarCyclic;
     private WebView webview;
+    private AdView mAdView;
     private BottomNavigationView bottomNavigationView;
 
     private String pageTitle;
@@ -60,6 +66,16 @@ public class WebViewActivity extends AppCompatActivity implements BottomNavigati
         });
 
         webview.loadUrl(fullUrl);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override

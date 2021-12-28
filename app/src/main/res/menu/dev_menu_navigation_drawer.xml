@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group
+        android:id="@+id/grpAboutAppDeveloper"
+        android:checkableBehavior="single">
+        <item android:title="@string/dev_about_app_developer">
+            <menu>
+                <item
+                    android:id="@+id/mmAboutAppsNesst"
+                    android:icon="@drawable/dev_circle_icon"
+                    android:title="@string/dev_about_apps_nesst" />
+                <item
+                    android:id="@+id/mmOtherAppsFromDeveloper"
+                    android:icon="@drawable/dev_circle_icon"
+                    android:title="@string/dev_other_apps_from_developer" />
+                <item
+                    android:id="@+id/mmContactDeveloper"
+                    android:icon="@drawable/dev_circle_icon"
+                    android:title="@string/dev_contact_developer" />
+            </menu>
+        </item>
+    </group>
+    <group
+        android:id="@+id/grpAppUtility"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/mmAppShare"
+            android:icon="@drawable/dev_share_icon"
+            android:title="@string/dev_app_share" />
+        <item
+            android:id="@+id/mmAppRate"
+            android:icon="@drawable/dev_rate_icon"
+            android:title="@string/dev_app_rate" />
+        <item
+            android:id="@+id/mmAppExit"
+            android:icon="@drawable/dev_exit_icon"
+            android:title="@string/dev_app_exit" />
+    </group>
+
+    <group android:id="@+id/grpAppVersion">
+        <item
+            android:id="@+id/mmAppVersion"
+            android:enabled="false"
+            android:title="V" />
+    </group>
+
+</menu>

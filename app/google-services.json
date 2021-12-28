@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "962476231484",
+    "firebase_url": "https://search-wikipedia-57fb2.firebaseio.com",
+    "project_id": "search-wikipedia-57fb2",
+    "storage_bucket": "search-wikipedia-57fb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962476231484:android:0f37c7db707849643bec39",
+        "android_client_info": {
+          "package_name": "com.sample.app.searchwikipedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962476231484-72kk1gh88h5dce9s90rdmiqeooi8sdqg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4gi0EPa5D6aew-GBEVI49XikKIyPhQok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "962476231484-72kk1gh88h5dce9s90rdmiqeooi8sdqg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

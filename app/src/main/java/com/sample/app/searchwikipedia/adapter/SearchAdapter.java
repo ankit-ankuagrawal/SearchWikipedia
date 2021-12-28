@@ -3,6 +3,7 @@ package com.sample.app.searchwikipedia.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.AdView;
 import com.sample.app.searchwikipedia.R;
+import com.sample.app.searchwikipedia.activity.SearchActivity;
 import com.sample.app.searchwikipedia.activity.WebViewActivity;
 import com.sample.app.searchwikipedia.model.PageItem;
 import com.sample.app.searchwikipedia.util.SearchUtility;
@@ -30,13 +33,14 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
+    private static final int TYPE_BANNER_ID = 2;
 
-    private List<PageItem> pageItemList;
+    private List<Object> pageItemList;
     private Context context;
 
     private String searchWord = "";
 
-    public SearchAdapter(Context context, List<PageItem> pageItemList) {
+    public SearchAdapter(Context context, List<Object> pageItemList) {
         this.context = context;
         this.pageItemList = pageItemList;
     }
@@ -66,6 +70,13 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
     }
 
+    public class ViewHolderAdMob extends RecyclerView.ViewHolder {
+
+        ViewHolderAdMob(View view) {
+            super(view);
+        }
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rowView = null;
@@ -79,16 +90,23 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     .inflate(R.layout.search_list_row, parent, false);
             return new ViewHolderItem(rowView);
         }
+        else if(viewType == TYPE_BANNER_ID)
+        {
+            rowView = LayoutInflater.from(parent.getContext()).inflate(R.layout.banner_ad_container,
+                    parent, false);
+            return new ViewHolderAdMob(rowView);
+        }
 
         throw new RuntimeException("there is no type that matches the type " + viewType + " + make sure your using types correctly");
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        Log.i(LOG_TAG, position+", "+holder);
 
         if (holder instanceof ViewHolderItem) {
             ViewHolderItem viewHolderItem = (ViewHolderItem) holder;
-            final PageItem pageItem = pageItemList.get(position - 1);
+            final PageItem pageItem = (PageItem) pageItemList.get(position - 1);
             viewHolderItem.linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -115,6 +133,21 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 viewHolderHeader.tvSearchTitle.setText(context.getString(R.string.search_result) + " " + "\"" + searchWord + "\"");
             }
         }
+        else if(holder instanceof ViewHolderAdMob)
+        {
+            ViewHolderAdMob bannerHolder = (ViewHolderAdMob) holder;
+            AdView adView = (AdView) pageItemList.get(position-1);
+            ViewGroup adCardView = (ViewGroup) bannerHolder.itemView;
+
+            if (adCardView.getChildCount() > 0) {
+                adCardView.removeAllViews();
+            }
+            if (adView.getParent() != null) {
+                ((ViewGroup) adView.getParent()).removeView(adView);
+            }
+            // Add the banner ad to the ad view.
+            adCardView.addView(adView);
+        }
     }
 
     @Override
@@ -122,7 +155,8 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (isPositionHeader(position)) {
             return TYPE_HEADER;
         }
-        return TYPE_ITEM;
+        return ((position-1) % SearchActivity.ITEMS_PER_AD == SearchActivity.AD_POSITION_AMONG_ITEMS_PER_AD) ? TYPE_BANNER_ID
+                : TYPE_ITEM;
     }
 
     private boolean isPositionHeader(int position) {
