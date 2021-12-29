@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.sample.app.searchwikipedia.activity.WebViewActivity">
+    tools:context="com.sample.app.searchwikipedia.com.appsnesst.searchwikipedia.view.activity.WebViewActivity">
 
     <ProgressBar
         android:id="@+id/progressBarCyclic"

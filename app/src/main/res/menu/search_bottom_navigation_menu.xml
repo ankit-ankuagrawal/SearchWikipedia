@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/navigationDrawer"
+        android:icon="@drawable/dev_navigation_icon"
+        android:title="@string/navigation_drawer"
+        app:labelVisibilityMode="unlabeled" />
+
+    <item
         android:id="@+id/exitApp"
         android:icon="@drawable/ic_exit_to_app_black_24dp"
         android:title="@string/exit_app"

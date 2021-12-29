@@ -42,4 +42,12 @@ We are a team of like-minded people, engaged in software development, specialize
     <string name="contact_no">+91-8503990796</string>
     <string name="email_id">appsnesst@gmail.com</string>
 
+    <string name="search_activity_ad_unit_id" translatable="false">ca-app-pub-7157770574029952/7207231202</string>
+
+    <!--Strings added in 6.0!-->
+    <string name="search">Search</string>
+    <string name="you_are_offline_please_check_your_internet_connection">You are offline. Please check your internet connection</string>
+    <string name="search_query_empty_error">Search Query can\'t be empty</string>
+    <string name="navigation_drawer">Drawer</string>
+
 </resources>
